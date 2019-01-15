@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { generateNewNumber } from './utils/generator';
+import ReactToPrint from "react-to-print";
+import { generateNewNumber, getNumberList } from './utils/generator';
+import PDFPrint from './PDFPrint';
 import './App.scss';
 
 class App extends Component {
@@ -12,11 +14,30 @@ class App extends Component {
     }
   }
 
+  componentDidMount() {
+    const numberList = getNumberList();
+    if (numberList) {
+      this.setState({
+        total: numberList.length
+      })
+    }
+  }
+
   generateNumber = () => {
     const generatedNumber = generateNewNumber();
-    this.setState({
-      number: generatedNumber
-    })
+    const numberList = getNumberList();
+    if (numberList) {
+      this.setState({
+        number: generatedNumber,
+        total: numberList.length
+      })
+    } else {
+      this.setState({
+        number: generatedNumber,
+        total: 0
+      })
+    }
+
   }
 
   render() {
@@ -30,11 +51,17 @@ class App extends Component {
           </div>
           <div className="main">
             <div className="header">
-              <h1>{number}</h1>
+              <h1>{number === '' ? ('. . . .') : number}</h1>
             </div>
             <div className="button-wrapper">
               <button onClick={this.generateNumber} className="button generate">Generate New Number</button>
-              <button className="button download">Download Generated Numbers</button>
+              <ReactToPrint
+                trigger={() => <button className="button download">Download Generated Numbers</button>}
+                content={() => this.componentRef}
+              />
+              <div style={{ display: 'none' }}>
+                <PDFPrint ref={el => (this.componentRef = el)} />
+              </div>
             </div>
           </div>
         </div>
