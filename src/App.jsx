@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactToPrint from "react-to-print";
-import { generateNewNumber, getNumberList } from './utils/generator';
+import { generateNewNumber, getNumberList, clearStorageList } from './utils/generator';
 import PDFPrint from './PDFPrint';
 import './App.scss';
 
@@ -35,9 +35,13 @@ class App extends Component {
       this.setState({
         number: generatedNumber,
         total: 0
-      })
+      });
     }
+  }
 
+  clearStorage = () => {
+    clearStorageList();
+    window.location.reload();
   }
 
   render() {
@@ -58,6 +62,7 @@ class App extends Component {
               <ReactToPrint
                 trigger={() => <button className="button download">Download Generated Numbers</button>}
                 content={() => this.componentRef}
+                onAfterPrint={this.clearStorage}
               />
               <div style={{ display: 'none' }}>
                 <PDFPrint ref={el => (this.componentRef = el)} />
