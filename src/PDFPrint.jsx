@@ -13,7 +13,7 @@ class PDFPrint extends Component {
     if (numberList) {
       this.setState({
         numbers: numberList
-      })
+      });
     }
   }
   render() {
