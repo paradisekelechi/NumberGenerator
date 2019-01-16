@@ -1,11 +1,12 @@
-import fs from 'fs';
-import express from 'express';
-
+const express = require('express');
+const path = require('path');
+const port = process.env.PORT || 8080;
 const app = express();
 
-app.get('/api/generator', (req, res) => {
+app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'build')));
 
-  res.send('An alligator approaches!');
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
-
-app.listen(3002, () => console.log('Generator app listening on port 3002!'));
+app.listen(port);
