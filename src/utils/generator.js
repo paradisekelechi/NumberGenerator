@@ -32,3 +32,7 @@ export const getNumberList = () => {
   }
   return null;
 }
+
+export const clearStorageList = () => {
+  localStorage.removeItem('numbers');
+}
