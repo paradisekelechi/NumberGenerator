@@ -18,11 +18,18 @@ class PDFPrint extends Component {
   }
   render() {
     const { numbers } = this.state;
+    const { order } = this.props;
     return (
       <div>
-        {numbers.length > 0 && numbers.sort().map((number, i) => (
-          <h4 key={i}>{number}</h4>
-        ))}
+        {
+          order === 'ascending' ?
+            numbers.length > 0 && numbers.sort().map((number, i) => (
+              <h4 key={i}>{number}</h4>
+            )) :
+            numbers.length > 0 && numbers.sort((a, b) => b - a).map((number, i) => (
+              <h4 key={i}>{number}</h4>
+            ))
+        }
       </div>
     );
   }

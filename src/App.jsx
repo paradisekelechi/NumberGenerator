@@ -60,12 +60,18 @@ class App extends Component {
             <div className="button-wrapper">
               <button onClick={this.generateNumber} className="button generate">Generate New Number</button>
               <ReactToPrint
-                trigger={() => <button className="button download">Download Generated Numbers</button>}
+                trigger={() => <button className="button download">Download Generated Numbers In Ascending Order</button>}
                 content={() => this.componentRef}
                 onAfterPrint={this.clearStorage}
               />
+              <ReactToPrint
+                trigger={() => <button className="button download">Download Generated Numbers In Descending Order</button>}
+                content={() => this.componentDescRef}
+                onAfterPrint={this.clearStorage}
+              />
               <div style={{ display: 'none' }}>
-                <PDFPrint ref={el => (this.componentRef = el)} />
+                <PDFPrint order='ascending' ref={el => (this.componentRef = el)} />
+                <PDFPrint order='descending' ref={el => (this.componentDescRef = el)} />
               </div>
             </div>
           </div>
