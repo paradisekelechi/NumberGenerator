@@ -6,7 +6,7 @@ export const generateNewNumber = () => {
 }
 
 
-const padNumber = (numberOfTimes, number) => {
+export const padNumber = (numberOfTimes, number) => {
   let paddedNumber = number;
   for (let index = 0; index < numberOfTimes; index++) {
     paddedNumber = `0${paddedNumber}`;

@@ -15,6 +15,11 @@ body, html, #root{
   align-items: center;
 }
 
+.statWrapper{
+  display: flex;
+  justify-content: space-between;
+}
+
 .content{
   padding: 20px;
   width: 100%;
@@ -67,7 +72,7 @@ body, html, #root{
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
-      height: 150px;
+      height: 80px;
       button{
         width: 43%;
         height: 66px;
